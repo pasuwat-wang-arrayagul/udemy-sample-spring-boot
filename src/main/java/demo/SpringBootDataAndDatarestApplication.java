@@ -27,12 +27,21 @@ public class SpringBootDataAndDatarestApplication extends SpringBootServletIniti
     @PostConstruct
     public void init(){
         Set<Player> players = new HashSet<>();
-        players.add(new Player("Van Dirk","CB"));
-        players.add(new Player("Henderson","MC"));
-        players.add(new Player("Sarah","FC"));
+        players.add(new Player("Van Dirk","DF"));
+        players.add(new Player("Henderson","MF"));
+        players.add(new Player("Sarah","FW"));
 
-        Team team = new Team("Liverpool","Anfield",players);
-        teamRepository.save(team);
+        Team liverpool = new Team("Liverpool","Anfield",players);
+
+        Set<Player> chelseaPlayers = new HashSet<>();
+        chelseaPlayers.add(new Player("N'Golo Kante","MF"));
+        chelseaPlayers.add(new Player("Tammy Abraham","FW"));
+        chelseaPlayers.add(new Player("Kepa Arrizabalaga","GK"));
+
+        Team chelsea = new Team("Chelsea","Stamford Bridge" , chelseaPlayers);
+
+        teamRepository.save(liverpool);
+        teamRepository.save(chelsea);
     }
 
     @Autowired

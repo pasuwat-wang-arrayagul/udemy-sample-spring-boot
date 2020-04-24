@@ -16,12 +16,12 @@ public class TeamController {
     @Autowired
     TeamRepository teamRepository ;
 
-    @GetMapping("/teams/{teamName}")
+    @GetMapping("/t/{teamName}")
     public Team getTeam(@PathVariable String teamName){
         return teamRepository.findByName(teamName);
     }
 
-    @GetMapping("/teams")
+    @GetMapping("/t")
     public List<Team> getAllTeams(){
         return teamRepository.findAll();
     }

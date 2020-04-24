@@ -2,31 +2,27 @@ package demo.controller;
 
 import demo.domain.Player;
 import demo.domain.Team;
+import demo.repository.TeamRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-
-import javax.annotation.PostConstruct;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 @RestController
 public class TeamController {
 
-    private Team team;
+    @Autowired
+    TeamRepository teamRepository ;
 
-    @PostConstruct
-    public void init(){
-        Set<Player> players = new HashSet<>();
-        players.add(new Player("Van Dirk","CB"));
-        players.add(new Player("Henderson","MC"));
-        players.add(new Player("Sarah","FC"));
-
-        team = new Team("Liverpool","Anfield",players);
+    @GetMapping("/teams/{teamName}")
+    public Team getTeam(@PathVariable String teamName){
+        return teamRepository.findByName(teamName);
     }
 
-    @GetMapping("/liverpool")
-    public Team getTeamLiverpool(){
-        return team;
+    @GetMapping("/teams")
+    public List<Team> getAllTeams(){
+        return teamRepository.findAll();
     }
 }

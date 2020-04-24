@@ -1,11 +1,18 @@
 package demo.domain;
 
 import java.util.Set;
+import javax.persistence.*;
 
+@Entity
 public class Team {
+    @Id
+    @GeneratedValue
+    Long id;
     String name;
     String stadiumName;
     String mascot;
+
+    @OneToMany(cascade = CascadeType.ALL) @JoinColumn(name="teamId")
     Set<Player> players;
 
     public Team(){
@@ -17,6 +24,14 @@ public class Team {
         this.name = name;
         this.stadiumName = stadiumName;
         this.players = players;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

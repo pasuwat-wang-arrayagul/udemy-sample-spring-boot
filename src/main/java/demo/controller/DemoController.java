@@ -26,4 +26,9 @@ public class DemoController {
         return "hello";
     }
 
+    @RequestMapping("/hi/jsp/{name}")
+    public String hiJSP(Map model,@PathVariable String name){
+        model.put("name",name);
+        return "hello";
+    }
 }
